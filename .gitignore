@@ -1,0 +1,99 @@
+ ==========================
+# IDEs and Editor Config Files
+# ==========================
+# IntelliJ IDEA / Android Studio
+*.iml
+.idea/**
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# ==========================
+# Build System Files
+# ==========================
+# Gradle
+.gradle/**
+
+# Kotlin
+.kotlin
+.fleet
+
+# ==========================
+# Build Output
+# ==========================
+# General build output
+**/build/
+!src/**/build/
+
+# Android NDK
+.externalNativeBuild
+.cxx
+
+# iOS build output
+iosApp/Pods/*
+iosApp/iosApp.xcworkspace/*
+iosApp/iosApp.xcodeproj/*
+!iosApp/iosApp.xcodeproj/project.pbxproj
+
+# ==========================
+# Xcode Specific
+# ==========================
+# Xcode project files
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+
+# Xcode shared data
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# Xcode compatibility with older versions
+*.xcscmblueprint
+*.xccheckout
+
+# ==========================
+# iOS Specific
+# ==========================
+# CocoaPods
+Pods/
+iosApp/Podfile.lock
+
+# Obj-C/Swift specific
+*.hmap
+
+# App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ==========================
+# System Files
+# ==========================
+# macOS
+.DS_Store
+
+# ==========================
+# Local Configuration Files
+# ==========================
+# Android local properties
+local.properties
+
+# Secret properties
+/secret.properties
+
+# ==========================
+# Miscellaneous
+# ==========================
+# Captures (Android Studio)
+captures/
+
+# Shared podspec
+shared/shared.podspec
