@@ -1,4 +1,4 @@
-package com.sanlean.totem.domain
+package com.sanlean.totem.domain.usecase
 
 import com.sanlean.totem.data.ClassRepository
 

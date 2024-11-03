@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="checkin_message">Haga el check-in de su hijo en las clases de CCKids</string>
+    <string name="child_already_registered">Niño ya registrado</string>
+    <string name="first_checkin">Primer check-in</string>
+    <string name="enter_child_name">Ingrese el nombre del niño</string>
+    <string name="back">Atrás</string>
+    <string name="guardian">Responsable</string>
+    <string name="age">Edad</string>
+    <string name="space">Espacio</string>
+    <string name="delete">Eliminar</string>
+    <string name="finish">Terminar</string>
+    <string name="first_checkin_prompt">Realice el primer check-in</string>
+    <string name="child_name_prompt">¿Cuál es el nombre del niño?</string>
+    <string name="guardian_name_prompt">¿Cuál es el nombre del responsable?</string>
+    <string name="child_age_prompt">¿Cuál es la edad del niño?</string>
+    <string name="checkin_success">¡Check-in completado!</string>
+    <string name="label_instructions">Retire la etiqueta de la impresora al lado y colóquela en la ropa del niño</string>
+    <string name="complete">Completar</string>
+    <string name="clear">Borrar</string>
+    <string name="additional_character">Ñ</string>
+</resources>

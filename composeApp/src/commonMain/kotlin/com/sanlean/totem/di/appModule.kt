@@ -2,7 +2,7 @@ package com.sanlean.totem.di
 
 import com.sanlean.totem.data.ClassClient
 import com.sanlean.totem.data.ClassRepository
-import com.sanlean.totem.domain.SearchStudentUseCase
+import com.sanlean.totem.domain.usecase.SearchStudentUseCase
 import com.sanlean.totem.presentation.SearchViewModel
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher

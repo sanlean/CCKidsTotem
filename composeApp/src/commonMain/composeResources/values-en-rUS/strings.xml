@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="checkin_message">Check your child into the CCKids classes</string>
+    <string name="child_already_registered">Child already registered</string>
+    <string name="first_checkin">First check-in</string>
+    <string name="enter_child_name">Enter the child’s name</string>
+    <string name="back">Back</string>
+    <string name="guardian">Guardian</string>
+    <string name="age">Age</string>
+    <string name="space">Space</string>
+    <string name="delete">Delete</string>
+    <string name="finish">Finish</string>
+    <string name="first_checkin_prompt">Make the first check-in</string>
+    <string name="child_name_prompt">What is the child’s name?</string>
+    <string name="guardian_name_prompt">What is the guardian’s name?</string>
+    <string name="child_age_prompt">What is the child’s age?</string>
+    <string name="checkin_success">Check-in completed!</string>
+    <string name="label_instructions">Take the label from the printer beside you and attach it to the child’s clothing</string>
+    <string name="complete">Complete</string>
+    <string name="clear">Clear</string>
+    <string name="additional_character">Ñ</string>
+</resources>

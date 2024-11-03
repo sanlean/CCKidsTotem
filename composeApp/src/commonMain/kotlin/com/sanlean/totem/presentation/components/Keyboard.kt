@@ -1,4 +1,4 @@
-package com.sanlean.totem
+package com.sanlean.totem.presentation.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,9 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringResource
+import totem.composeapp.generated.resources.*
+import totem.composeapp.generated.resources.Res
+import totem.composeapp.generated.resources.clear
+import totem.composeapp.generated.resources.delete
+import totem.composeapp.generated.resources.space
 
 @Composable
 fun SimpleKeyboard(
@@ -26,7 +30,7 @@ fun SimpleKeyboard(
     }
     val letterKeys = listOf(
         listOf("Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"),
-        listOf("A", "S", "D", "F", "G", "H", "J", "K", "L", "Ç"),
+        listOf("A", "S", "D", "F", "G", "H", "J", "K", "L", stringResource(Res.string.additional_character)),
         listOf("Z", "X", "C", "V", "B", "N", "M", "'", "^", "~"),
     )
 
@@ -45,7 +49,7 @@ fun SimpleKeyboard(
             onClick = { onKeyClick(" ") },
             modifier = Modifier.padding(4.dp).height(56.dp).width(widthRows)
         ) {
-            Text("ESPAÇO")
+            Text(stringResource(Res.string.space))
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -59,13 +63,13 @@ fun SimpleKeyboard(
                 onClick = onDeleteClick,
                 modifier = Modifier.padding(4.dp).width(100.dp)
             ) {
-                Text("APAGAR")
+                Text(stringResource(Res.string.delete))
             }
             Button(
                 onClick = onClearClick,
                 modifier = Modifier.padding(4.dp).width(100.dp)
             ) {
-                Text("LIMPAR")
+                Text(stringResource(Res.string.clear))
             }
         }
     }
@@ -98,7 +102,7 @@ fun KeyButton(
 ){
     Button(
         onClick = {
-            if ("^[A-ZÇ]$".toRegex().matches(key)) {
+            if ("^[A-ZÇÑ]$".toRegex().matches(key)) {
                 onKeyClick(key)
             } else {
                 onAccentClick(key)

@@ -1,4 +1,4 @@
-package com.sanlean.totem
+package com.sanlean.totem.domain.utils
 
 fun String.isVowel() = this in "AEIOU"
 

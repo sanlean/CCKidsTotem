@@ -2,7 +2,7 @@ package com.sanlean.totem.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sanlean.totem.domain.SearchStudentUseCase
+import com.sanlean.totem.domain.usecase.SearchStudentUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

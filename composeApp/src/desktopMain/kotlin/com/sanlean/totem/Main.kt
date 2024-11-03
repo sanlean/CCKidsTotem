@@ -10,9 +10,9 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "Totem",
         state = androidx.compose.ui.window.WindowState(
-            width = 1920.dp,
-            height = 1080.dp,
-            //placement = androidx.compose.ui.window.WindowPlacement.Fullscreen // Ativa o modo tela cheia
+            height = 1920.dp,
+            width = 1080.dp,
+            //placement = androidx.compose.ui.window.WindowPlacement.Fullscreen
         )
     ) {
         initKoin()
