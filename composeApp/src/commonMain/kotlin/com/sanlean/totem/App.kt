@@ -15,19 +15,20 @@ import org.koin.compose.viewmodel.koinViewModel
 @Preview
 fun App() {
     var showWelcomeScreen by remember { mutableStateOf(true) }
-    var lang by remember { mutableStateOf(Language.getDefault().isoFormat()) }
+    var realTimeLanguage by remember { mutableStateOf(Language.getDefault().isoFormat()) }
 
     MaterialTheme {
 
-        LocalizedApp(language = lang) {
+        LocalizedApp(language = realTimeLanguage) {
             if (showWelcomeScreen) {
-                WelcomeScreen(onStartClicked = { showWelcomeScreen = false }, onLanguageSelected = {language ->
-                    LocalizationWrapper.changeLang(language)
-                    lang = language.isoFormat()
-                })
+                WelcomeScreen(
+                    onStartClicked = { showWelcomeScreen = false },
+                    onLanguageSelected = { language ->
+                        LocalizationWrapper.changeLang(language)
+                        realTimeLanguage = language.isoFormat()
+                    })
             } else {
-                val searchViewModel = koinViewModel<SearchViewModel>()
-                SearchScreen(onBack = { showWelcomeScreen = true }, searchViewModel = searchViewModel)
+                SearchScreen(onBack = { showWelcomeScreen = true })
             }
         }
     }

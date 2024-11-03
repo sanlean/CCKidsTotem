@@ -12,19 +12,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sanlean.totem.presentation.components.SimpleKeyboard
 import com.sanlean.totem.domain.utils.applyAccent
 import com.sanlean.totem.domain.utils.isVowel
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import totem.composeapp.generated.resources.Res
 import totem.composeapp.generated.resources.back
 import totem.composeapp.generated.resources.enter_child_name
 
 @Composable
 fun SearchScreen(
-    onBack: () -> Unit,
-    searchViewModel: SearchViewModel
+    onBack: () -> Unit
 ) {
+    val searchViewModel = koinViewModel<SearchViewModel>()
     var childName by remember { mutableStateOf("") }
     var accent by remember { mutableStateOf("") }
 
@@ -79,32 +81,33 @@ fun SearchScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Teclado virtual básico com letras maiúsculas
-        SimpleKeyboard(
-            onKeyClick = { key ->
-                if (accent.isNotEmpty()) {
-                    childName += if (key.isVowel()) {
-                        key.applyAccent(accent)
+        if (searchViewModel.shouldUseComposeKeyboard()){
+            SimpleKeyboard(
+                onKeyClick = { key ->
+                    if (accent.isNotEmpty()) {
+                        childName += if (key.isVowel()) {
+                            key.applyAccent(accent)
+                        } else {
+                            key
+                        }
+                        accent = ""
                     } else {
-                        key
+                        childName += key
+                    }
+                },
+                onDeleteClick = {
+                    if (childName.isNotEmpty()) {
+                        childName = childName.dropLast(1)
                     }
                     accent = ""
-                } else {
-                    childName += key
-                }
-            },
-            onDeleteClick = {
-                if (childName.isNotEmpty()) {
-                    childName = childName.dropLast(1)
-                }
-                accent = ""
-            },
-            onClearClick = {
-                childName = ""
-                accent = ""
-            },
-            onAccentClick = { key -> accent = key }
-        )
+                },
+                onClearClick = {
+                    childName = ""
+                    accent = ""
+                },
+                onAccentClick = { key -> accent = key }
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 

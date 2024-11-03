@@ -34,7 +34,8 @@ fun SimpleKeyboard(
         listOf("Z", "X", "C", "V", "B", "N", "M", "'", "^", "~"),
     )
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.wrapContentWidth()) {
 
 
