@@ -65,12 +65,12 @@ fun SearchScreen(
                 LazyColumn {
                     items(suggestions.value.size) { suggestion ->
                         Text(
-                            text = suggestions.value[suggestion],
+                            text = suggestions.value[suggestion].name,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
                                     // Preenche o campo com a sugestão clicada
-                                    childName = suggestions.value[suggestion]
+                                    childName = suggestions.value[suggestion].name
                                 }
                                 .padding(8.dp)
                         )

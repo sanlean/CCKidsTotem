@@ -1,0 +1,16 @@
+CREATE TABLE StudentEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    guardian_name TEXT NOT NULL,
+    age INTEGER,
+    birth_date TEXT
+);
+
+CREATE INDEX Student_name_index ON StudentEntity(name);
+
+selectAll:
+SELECT * FROM StudentEntity;
+
+insertStudent:
+INSERT INTO StudentEntity (id, name, guardian_name, age, birth_date)
+VALUES (?, ?, ?, ?, ?);

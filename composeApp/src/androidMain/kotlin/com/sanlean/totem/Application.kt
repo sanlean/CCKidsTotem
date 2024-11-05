@@ -11,9 +11,9 @@ class Application: Application() {
     }
 
     companion object {
-        private var appContext: Context? = null
+        private lateinit var appContext: Context
 
-        fun getContext(): Context? {
+        fun getContext(): Context {
             return appContext
         }
     }

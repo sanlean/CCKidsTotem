@@ -1,7 +1,9 @@
 package com.sanlean.totem.di
 
-import com.sanlean.totem.data.ClassClient
-import com.sanlean.totem.data.ClassRepository
+import com.sanlean.totem.data.api.ClientFactory
+import com.sanlean.totem.data.api.ApiRepository
+import com.sanlean.totem.data.database.DatabaseSetup
+import com.sanlean.totem.data.database.DriverFactory
 import com.sanlean.totem.domain.usecase.KeyboardTypeUseCase
 import com.sanlean.totem.domain.usecase.SearchStudentUseCase
 import com.sanlean.totem.domain.os.DeviceWrapper
@@ -15,11 +17,14 @@ import org.koin.dsl.module
 
 val appModule = module {
     single<CoroutineDispatcher> { Dispatchers.IO }
-    single<HttpClient> { ClassClient.client }
+    single<HttpClient> { ClientFactory.client }
 
-    single { ClassRepository(dispatcher = get(), client = get()) }
+    single { ApiRepository(dispatcher = get(), client = get()) }
 
     single { DeviceWrapper }
+
+    single { DriverFactory.createDriver() }
+    single { DatabaseSetup.createDatabase(get()) }
 
     single { SearchStudentUseCase(repository = get()) }
     single { KeyboardTypeUseCase(deviceWrapper = get()) }
