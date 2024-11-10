@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.detektCompilerPlugin)
 }
 
 kotlin {
@@ -16,12 +18,12 @@ kotlin {
             }
         }
     }
-    
+
     jvm("desktop")
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -85,6 +87,10 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
+    detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.23.7")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-rules-libraries:1.23.7")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-rules-ruleauthors:1.23.7")
 }
 
 compose.desktop {
@@ -104,5 +110,26 @@ sqldelight {
         create("Database") {
             packageName.set("com.sanlean.totem")
         }
+    }
+}
+
+val detektFormat by tasks.registering(io.gitlab.arturbosch.detekt.Detekt::class) {
+    description = "Formats whole project"
+    autoCorrect = true
+    parallel = true
+    disableDefaultRuleSets = true
+    buildUponDefaultConfig = true
+    setSource(file(projectDir))
+    config.setFrom(listOf(file("$rootDir/gradle/detekt/detekt.yml")))
+    include("**/*.kt")
+    include("**/*.kts")
+    exclude("**/resources/**")
+    exclude("**/build/**")
+    reports {
+        md.required.set(false)
+        sarif.required.set(false)
+        txt.required.set(false)
+        html.outputLocation.set(file("$buildDir/reports/detekt/format/detektFormat.html"))
+        xml.outputLocation.set(file("$buildDir/reports/detekt/format/detektFormat.xml"))
     }
 }

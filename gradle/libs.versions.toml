@@ -11,7 +11,7 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.2"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.6.11"
+compose-plugin = "1.7.0"
 junit = "4.13.2"
 kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
@@ -19,6 +19,7 @@ kotlinx-datetime = "0.6.1"
 koin = "4.0.0"
 ktor = "3.0.0"
 sqldelight = "2.0.2"
+detekt = "1.23.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -57,3 +58,5 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detektCompilerPlugin = { id = "io.github.detekt.gradle.compiler-plugin", version.ref = "detekt" }
