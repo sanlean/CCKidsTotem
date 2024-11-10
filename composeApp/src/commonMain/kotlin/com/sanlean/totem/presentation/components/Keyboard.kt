@@ -36,9 +36,8 @@ fun SimpleKeyboard(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.wrapContentWidth()) {
-
-
+        modifier = Modifier.wrapContentWidth()
+    ) {
         for (row in letterKeys) {
             KeyboardRow(onKeyClick, onAccentClick, row, changeRowWidth)
         }
@@ -82,10 +81,10 @@ fun KeyboardRow(
     onAccentClick: (String) -> Unit,
     keys: List<String>,
     changeRowWidth: (Int) -> Unit
-){
+) {
     Row(
         modifier = Modifier.wrapContentWidth().onGloballyPositioned { coordinates ->
-            changeRowWidth(coordinates.size.width )
+            changeRowWidth(coordinates.size.width)
         },
         horizontalArrangement = Arrangement.Center,
     ) {
@@ -100,7 +99,7 @@ fun KeyButton(
     onKeyClick: (String) -> Unit,
     onAccentClick: (String) -> Unit,
     key: String
-){
+) {
     Button(
         onClick = {
             if ("^[A-ZÇÑ]$".toRegex().matches(key)) {
@@ -115,5 +114,4 @@ fun KeyButton(
     ) {
         Text(key)
     }
-
 }

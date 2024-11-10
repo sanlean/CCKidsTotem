@@ -9,5 +9,5 @@ data class Student(
     val name: String,
     val guardianName: String,
     val age: Int,
-    val birthDate: LocalDate?
+    val birthDate: LocalDate? = null
 )

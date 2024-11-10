@@ -3,7 +3,7 @@ package com.sanlean.totem
 import android.app.Application
 import android.content.Context
 
-class Application: Application() {
+class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,5 +17,4 @@ class Application: Application() {
             return appContext
         }
     }
-
 }

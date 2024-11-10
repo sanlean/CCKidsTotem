@@ -5,22 +5,25 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.sanlean.totem.presentation.components.SimpleKeyboard
+import com.sanlean.totem.domain.state.ResponseState
 import com.sanlean.totem.domain.utils.applyAccent
 import com.sanlean.totem.domain.utils.isVowel
+import com.sanlean.totem.presentation.components.SimpleKeyboard
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import totem.composeapp.generated.resources.Res
 import totem.composeapp.generated.resources.back
 import totem.composeapp.generated.resources.enter_child_name
+import totem.composeapp.generated.resources.error_loading_data
 
 @Composable
 fun SearchScreen(
@@ -30,7 +33,7 @@ fun SearchScreen(
     var childName by remember { mutableStateOf("") }
     var accent by remember { mutableStateOf("") }
 
-    val suggestions = searchViewModel.searchList.collectAsState()
+    val searchState = searchViewModel.searchList.collectAsState()
 
     LaunchedEffect(childName) {
         searchViewModel.searchStudents(childName)
@@ -43,7 +46,6 @@ fun SearchScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Campo de entrada para o nome da criança
         OutlinedTextField(
             value = childName,
             onValueChange = {
@@ -58,22 +60,37 @@ fun SearchScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Exibe as sugestões de nomes em uma lista rolável
-        if (suggestions.value.isNotEmpty()) {
-            // Limite de altura para a lista de sugestões
-            Box(modifier = Modifier.heightIn(max = 200.dp)) { // Defina a altura máxima desejada
-                LazyColumn {
-                    items(suggestions.value.size) { suggestion ->
-                        Text(
-                            text = suggestions.value[suggestion].name,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    // Preenche o campo com a sugestão clicada
-                                    childName = suggestions.value[suggestion].name
-                                }
-                                .padding(8.dp)
-                        )
+        when (val state = searchState.value) {
+            is ResponseState.Idle -> {
+            }
+
+            is ResponseState.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+            }
+            is ResponseState.Error -> {
+                Text(
+                    text = stringResource(Res.string.error_loading_data),
+                    color = Color.Red,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+            is ResponseState.Success -> {
+                if (state.data.isNotEmpty()) {
+                    Box(modifier = Modifier.heightIn(max = 200.dp)) {
+                        LazyColumn {
+                            items(state.data.size) { index ->
+                                val suggestion = state.data[index]
+                                Text(
+                                    text = suggestion.name,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            childName = suggestion.name
+                                        }
+                                        .padding(8.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -81,7 +98,7 @@ fun SearchScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (searchViewModel.shouldUseComposeKeyboard()){
+        if (searchViewModel.shouldUseComposeKeyboard()) {
             SimpleKeyboard(
                 onKeyClick = { key ->
                     if (accent.isNotEmpty()) {

@@ -3,21 +3,19 @@ package com.sanlean.totem.data.api
 import com.sanlean.totem.data.Repository
 import com.sanlean.totem.domain.constants.MINIMAL_ASYNC_DELAY
 import com.sanlean.totem.domain.model.Student
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import java.util.*
-
 
 class ApiRepository(
     private val dispatcher: CoroutineDispatcher,
     private val client: HttpClient
-): Repository {
+) : Repository {
 
-    override suspend fun searchStudent(search: String) = withContext(dispatcher) {
-        delay(MINIMAL_ASYNC_DELAY)
+    override suspend fun searchStudent(search: String) = makeRequest(dispatcher) {
         if (search.length > 2) {
+            delay(MINIMAL_ASYNC_DELAY)
             listOf(
                 "Ana", "Beatriz", "Carlos", "Daniel", "Eduardo", "Fernanda", "Gabriel", "Helena",
                 "Igor", "Joana", "Karla", "Luiz", "Marcelo", "Nina", "Olavo", "Paulo", "Quintino",
@@ -42,7 +40,7 @@ class ApiRepository(
         name: String,
         age: Int,
         guardianName: String
-    ): Boolean = withContext(dispatcher) {
+    ) = makeRequest(dispatcher) {
         delay(MINIMAL_ASYNC_DELAY)
         true
     }

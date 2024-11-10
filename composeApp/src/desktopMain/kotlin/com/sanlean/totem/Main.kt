@@ -12,7 +12,7 @@ fun main() = application {
         state = androidx.compose.ui.window.WindowState(
             height = 1920.dp,
             width = 1080.dp,
-            //placement = androidx.compose.ui.window.WindowPlacement.Fullscreen
+            // placement = androidx.compose.ui.window.WindowPlacement.Fullscreen
         )
     ) {
         initKoin()

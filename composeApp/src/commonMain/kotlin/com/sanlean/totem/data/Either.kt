@@ -1,10 +1,10 @@
-package com.sanlean.totem.data.api
+package com.sanlean.totem.data
 
-sealed class Either<out L, out R> {
-    data class Left<out L, out R>(val a: L) : Either<L, R>()
-    data class Right<out L, out R>(val b: R) : Either<L, R>()
+sealed class Either<out L : Exception, out R> {
+    data class Left<out L : Exception, out R>(val error: L) : Either<L, R>()
+    data class Right<out L : Exception, out R>(val value: R) : Either<L, R>()
 }
 
-fun <E> E.left() = Either.Left<E, Nothing>(this)
+fun <L : Exception> L.left() = Either.Left<L, Nothing>(this)
 
-fun <T> T.right() = Either.Right<Nothing, T>(this)
+fun <R> R.right() = Either.Right<Nothing, R>(this)

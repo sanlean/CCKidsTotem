@@ -12,5 +12,4 @@ actual object ClientFactory {
                 }
             }
         }
-
 }

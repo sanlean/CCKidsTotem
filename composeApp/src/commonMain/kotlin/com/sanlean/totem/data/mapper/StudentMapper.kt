@@ -10,10 +10,10 @@ fun StudentEntity.mapToBusiness() = Student(
     name = name,
     guardianName = guardian_name,
     age = age?.toInt() ?: 0,
-    birthDate = birth_date?.let{
+    birthDate = birth_date?.let {
         try {
             LocalDate.parse(it, LocalDate.Formats.ISO_BASIC)
-        }catch (e: DateTimeParseException){
+        } catch (e: DateTimeParseException) {
             null
         }
     }

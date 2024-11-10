@@ -1,6 +1,5 @@
 package com.sanlean.totem.data.database
 
-import android.content.Context
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.sanlean.totem.Application

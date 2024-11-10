@@ -21,7 +21,6 @@ import totem.composeapp.generated.resources.Res
 import totem.composeapp.generated.resources.cckids_logo
 import totem.composeapp.generated.resources.checkin_message
 import totem.composeapp.generated.resources.child_already_registered
-import com.sanlean.totem.domain.localization.LocalizationWrapper
 
 @Composable
 fun WelcomeScreen(onStartClicked: () -> Unit, onLanguageSelected: (Language) -> Unit) {
@@ -37,17 +36,15 @@ fun WelcomeScreen(onStartClicked: () -> Unit, onLanguageSelected: (Language) -> 
                 .weight(ONE_THIRD)
                 .fillMaxWidth()
         ) {
-
             Image(
                 painter = painterResource(Res.drawable.cckids_logo),
                 contentDescription = "Logo do CCKids",
                 modifier = Modifier.size(100.dp).align(Alignment.Center),
                 contentScale = ContentScale.Crop
             )
-            LanguageSelector{language ->
+            LanguageSelector { language ->
                 onLanguageSelected(language)
             }
-
         }
         Text(
             text = stringResource(Res.string.checkin_message),

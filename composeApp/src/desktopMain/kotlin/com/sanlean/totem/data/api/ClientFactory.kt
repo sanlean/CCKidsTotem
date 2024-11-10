@@ -11,5 +11,4 @@ actual object ClientFactory {
                 protocolVersion = HttpClient.Version.HTTP_2
             }
         }
-
 }

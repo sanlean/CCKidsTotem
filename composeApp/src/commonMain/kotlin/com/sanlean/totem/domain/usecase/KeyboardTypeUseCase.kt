@@ -11,4 +11,4 @@ class KeyboardTypeUseCase(private val deviceWrapper: DeviceWrapper) {
         val isDesktop = deviceWrapper.operatingSystem() == DESKTOP
         return isAndroidTablet || isDesktop
     }
-} 
+}

@@ -2,25 +2,33 @@ package com.sanlean.totem.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sanlean.totem.domain.model.Student
+import com.sanlean.totem.domain.state.MutableResponseFlow
+import com.sanlean.totem.domain.state.RegisteredStudentState
+import com.sanlean.totem.domain.state.RegisteredStudentState.FailOnOnRegister
+import com.sanlean.totem.domain.state.RegisteredStudentState.StudentRegistered
+import com.sanlean.totem.domain.state.ResponseFlow
+import com.sanlean.totem.domain.state.ResponseState.Loading
+import com.sanlean.totem.domain.state.ResponseState.Success
 import com.sanlean.totem.domain.usecase.KeyboardTypeUseCase
-import com.sanlean.totem.domain.usecase.SearchStudentUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.sanlean.totem.domain.usecase.RegisterStudentUseCase
 import kotlinx.coroutines.launch
 
-
-class SearchViewModel(
-    private val searchUseCase: SearchStudentUseCase,
+class RegisterViewModel(
+    private val registerUseCase: RegisterStudentUseCase,
     private val keyboardTypeUseCase: KeyboardTypeUseCase
 ) : ViewModel() {
-    private val _searchList = MutableStateFlow<List<Student>>(emptyList())
-    val searchList: StateFlow<List<Student>> = _searchList
+    private val _checkInStatus: MutableResponseFlow<RegisteredStudentState> = MutableResponseFlow()
+    val checkInStatus: ResponseFlow<RegisteredStudentState> = _checkInStatus
 
-    fun searchStudents(search: String) {
-        System.out.println("search for $search")
+    fun registerStudents(studentName: String, guardianName: String, age: Int) {
         viewModelScope.launch {
-            _searchList.value = searchUseCase(search).toList()
+            _checkInStatus.value = Loading
+            val registeredStudent = registerUseCase(studentName, guardianName, age)
+            if (registeredStudent != null) {
+                _checkInStatus.value = Success(StudentRegistered(registeredStudent))
+            } else {
+                _checkInStatus.value = Success(FailOnOnRegister)
+            }
         }
     }
 
